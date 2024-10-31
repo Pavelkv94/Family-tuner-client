@@ -10,10 +10,21 @@ type PlaylistPropsType = {
   setCurrentTab: (tab: number) => void;
   isPlayingRadio: boolean;
   loading: boolean;
-  showPlayer: boolean
+  showPlayer: boolean;
+  favoriteStations: string[];
 };
 
-const Playlist = ({ radioStations, handleSongClick, currentStation, currentTab, setCurrentTab, isPlayingRadio, loading, showPlayer }: PlaylistPropsType) => {
+const Playlist = ({
+  radioStations,
+  handleSongClick,
+  currentStation,
+  currentTab,
+  setCurrentTab,
+  isPlayingRadio,
+  loading,
+  showPlayer,
+  favoriteStations,
+}: PlaylistPropsType) => {
   const tabs = ["All", "Favorites"];
 
   return (
@@ -26,7 +37,7 @@ const Playlist = ({ radioStations, handleSongClick, currentStation, currentTab, 
         ))}
       </div>
       <div className="list">
-        {radioStations.map((station, i) => (
+        {radioStations?.map((station, i) => (
           <Station
             loading={loading}
             key={i}
@@ -34,6 +45,7 @@ const Playlist = ({ radioStations, handleSongClick, currentStation, currentTab, 
             isPlayingCurrentStation={station.id === currentStation?.id}
             isPlayingRadio={isPlayingRadio}
             handleSongClick={handleSongClick}
+            favoriteStations={favoriteStations}
           />
         ))}
       </div>

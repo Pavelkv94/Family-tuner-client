@@ -5,7 +5,7 @@ import Content from "./components/Content/Content";
 function App() {
   return (
     <Routes>
-      <Route index element={<Content />} />
+      <Route path="/:id" element={<Content />} />
     </Routes>
   );
 }

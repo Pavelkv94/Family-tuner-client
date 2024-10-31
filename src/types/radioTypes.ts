@@ -4,5 +4,5 @@ export type StationType = {
   genre: string;
   img: string;
   url: string;
-  id: number;
+  id: string;
 };

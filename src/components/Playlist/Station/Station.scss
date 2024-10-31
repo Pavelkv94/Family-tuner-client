@@ -13,34 +13,41 @@
     background-color: rgb(255, 255, 255, 0.2);
   }
 
-  .note {
+  .play-wrap {
     display: flex;
     align-items: center;
-    justify-content: center;
-    height: 60px;
-    width: 60px;
-  }
-  .station-content {
-    margin: 0 5px;
-    display: flex;
-    flex-direction: column;
-
-    p {
-      margin: 0;
-      font-size: 12px;
+    width: calc(100% - 70px);
+    .note {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 60px;
+      width: 60px;
     }
+    .station-content {
+      margin: 0 5px;
+      display: flex;
+      flex-direction: column;
 
-    span {
-      font-weight: 300;
-      font-size: 10px;
+      p {
+        margin: 0;
+        font-size: 12px;
+        margin-bottom: 4px;
+      }
+
+      span {
+        font-weight: 300;
+        font-size: 10px;
+      }
     }
   }
+
   .star {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 60px;
-    width: 60px;
-    margin-left: auto;
+    width: 80px;
+    margin-left: 10px;
   }
 }

@@ -1,25 +1,33 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useEffect, useRef, useState } from "react";
 import "./Content.scss";
 import { StationType } from "../../types/radioTypes";
-import { favoriteStations, radioStations } from "../../data";
 import Playlist from "../Playlist/Playlist";
 import Player from "../Player/Player";
+import { useParams } from "react-router-dom";
+import { useGetFavoritesQuery, useGetStationsQuery } from "../../redux/apiSlice";
 
 function Content() {
+  const { id } = useParams();
+
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const [currentTab, setCurrentTab] = useState<number>(0);
   const [currentStation, setCurrentStation] = useState<StationType | null>(null);
   const [isPlayingRadio, setIsPlayingRadio] = useState<boolean>(false);
-  const [stations, setStations] = useState<StationType[]>(radioStations);
-  const [loading, setLoading] = useState<boolean>(false); // Add loading state
-  const [showPlayer, setShowPlayer] = useState<boolean>(false); // Add loading state
+  const [stations, setStations] = useState<StationType[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [showPlayer, setShowPlayer] = useState<boolean>(false);
+
+  const { data: allstations, error: allError, isLoading: allLoading } = useGetStationsQuery(null);
+  const { data: favoriteStations, error: favoritesError, isLoading: favoritesLoading } = useGetFavoritesQuery(id);
 
   useEffect(() => {
-    const ids = favoriteStations.map((el) => el.id);
-    setStations(currentTab === 0 ? radioStations : radioStations.filter((el) => ids.includes(el.id)));
-  }, [currentTab]);
+    if (allstations && favoriteStations) {
+      setStations(currentTab === 0 ? allstations : allstations.filter((el: StationType) => favoriteStations.includes(el.id)));
+    }
+  }, [currentTab, allstations, favoriteStations]);
 
   const togglePlayRadio = () => {
     if (currentStation) {
@@ -84,6 +92,7 @@ function Content() {
         isPlayingRadio={isPlayingRadio}
         loading={loading}
         showPlayer={showPlayer}
+        favoriteStations={favoriteStations}
       />
       <Player
         isPlayingRadio={isPlayingRadio}
