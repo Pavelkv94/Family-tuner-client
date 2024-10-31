@@ -3,45 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Бегущая строка</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Выдвигающийся блок</title>
     <style>
-      body {
-    margin: 0;
-    background-color: #222;
-    color: white;
-    font-family: Arial, sans-serif;
-}
-
-.marquee {
-    overflow: hidden;
-    white-space: nowrap;
-    box-sizing: border-box;
-    width: 100%; /* Ширина бегущей строки */
-    background-color: #333; /* Цвет фона */
-}
-
-.marquee-content {
-    display: inline-block;
-    padding-left: 100%; /* Начальное смещение для анимации */
-    animation: marquee 10s linear infinite; /* Анимация */
-}
-
-@keyframes marquee {
-    from {
-        transform: translateX(0); /* Начальная позиция */
-    }
-    to {
-        transform: translateX(-100%); /* Конечная позиция */
-    }
-}
+        .container {
+            width: 300px; /* Ширина контейнера */
+            height: 200px; /* Высота контейнера */
+            border: 1px solid #ccc; /* Граница контейнера */
+            overflow: hidden; /* Скрыть переполнение */
+        }
+        
+        .box {
+            padding: 20px;
+            background-color: #f0f0f0; /* Цвет фона блоков */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Тень для блоков */
+        }
+        
+        .box1 {
+            height: 100%; /* Занять всю высоту контейнера */
+            transition: height 0.3s ease; /* Плавный переход */
+        }
+        
+        .box2 {
+            height: 0; /* Изначально высота равна 0 */
+            opacity: 0; /* Изначально невидим */
+            transition: height 0.3s ease, opacity 0.3s ease; /* Плавный переход */
+        }
     </style>
 </head>
 <body>
-    <div class="marquee">
-        <div class="marquee-content">
-            Это пример бегущей строки. Текст будет двигаться слева направо.
+    <div class="container">
+        <div class="box box1">
+            <p>Первый блок</p>
+            <button onclick="toggleBox()">Показать второй блок</button>
+        </div>
+        <div class="box box2">
+            <p>Второй блок</p>
         </div>
     </div>
+
+    <script>
+        function toggleBox() {
+            const box2 = document.querySelector('.box2');
+            
+            if (box2.style.height === '0px' || box2.style.height === '') {
+                box2.style.height = '100px'; // Установите нужную высоту второго блока
+                box2.style.opacity = '1'; // Делаем блок видимым
+            } else {
+                box2.style.height = '0'; // Скрываем второй блок
+                box2.style.opacity = '0'; // Делаем блок невидимым
+            }
+        }
+    </script>
 </body>
 </html>

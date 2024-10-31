@@ -1,20 +1,23 @@
-import { useState } from "react";
 import "./Playlist.scss";
 import Station from "./Station/Station";
+import { StationType } from "../../types/radioTypes";
+import { MouseEventHandler } from "react";
 type PlaylistPropsType = {
-  currentStation: any;
-  radioStations: any[];
-  handleSongClick: (currentStation: any) => void;
-  handleSongClick: (currentStation: any) => void;
-  currentTab: any;
-  setCurrentTab: (currentStation: any) => void;
+  currentStation: StationType | null;
+  radioStations: StationType[];
+  handleSongClick: (currentStation: StationType) => MouseEventHandler<HTMLDivElement> | undefined;
+  currentTab: number;
+  setCurrentTab: (tab: number) => void;
+  isPlayingRadio: boolean;
+  loading: boolean;
+  showPlayer: boolean
 };
 
-const Playlist = ({ radioStations, handleSongClick, currentStation, currentTab, setCurrentTab }: PlaylistPropsType) => {
+const Playlist = ({ radioStations, handleSongClick, currentStation, currentTab, setCurrentTab, isPlayingRadio, loading, showPlayer }: PlaylistPropsType) => {
   const tabs = ["All", "Favorites"];
 
   return (
-    <div className="playlist">
+    <div className={`playlist ${showPlayer ? "short" : ""}`}>
       <div className="tabs">
         {tabs.map((tab, i) => (
           <div className={`tab ${i === currentTab ? "active" : ""}`} key={i} onClick={() => setCurrentTab(i)}>
@@ -24,7 +27,14 @@ const Playlist = ({ radioStations, handleSongClick, currentStation, currentTab, 
       </div>
       <div className="list">
         {radioStations.map((station, i) => (
-          <Station key={i} station={station} isPlaying={station.id === currentStation?.id} handleSongClick={handleSongClick} />
+          <Station
+            loading={loading}
+            key={i}
+            station={station}
+            isPlayingCurrentStation={station.id === currentStation?.id}
+            isPlayingRadio={isPlayingRadio}
+            handleSongClick={handleSongClick}
+          />
         ))}
       </div>
     </div>
