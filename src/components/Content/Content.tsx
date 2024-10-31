@@ -20,8 +20,8 @@ function Content() {
   const [loading, setLoading] = useState<boolean>(false);
   const [showPlayer, setShowPlayer] = useState<boolean>(false);
 
-  const { data: allstations, error: allError, isLoading: allLoading } = useGetStationsQuery(null);
-  const { data: favoriteStations, error: favoritesError, isLoading: favoritesLoading } = useGetFavoritesQuery(id);
+  const { data: allstations } = useGetStationsQuery(null);
+  const { data: favoriteStations } = useGetFavoritesQuery(id);
 
   useEffect(() => {
     if (allstations && favoriteStations) {
