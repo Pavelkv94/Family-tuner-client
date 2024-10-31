@@ -1,0 +1,41 @@
+.equalizer {
+  display: flex;
+  align-items: flex-end;
+  width: 30px; /* Width of the equalizer */
+  height: 30px; /* Height of the equalizer */
+  position: relative;
+}
+
+.bar {
+  width: 4px; /* Width of each bar */
+  height: 100%; /* Full height */
+  margin: 0 1px;
+  background: linear-gradient(180deg, rgba(213, 0, 60, 1) 10%, rgba(0, 0, 0, 1) 100%);
+
+  animation: equalizer-animation 0.5s infinite alternate;
+}
+
+.bar:nth-child(1) {
+  animation-delay: 0s;
+}
+.bar:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.bar:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.bar:nth-child(4) {
+  animation-delay: 0.3s;
+}
+.bar:nth-child(5) {
+  animation-delay: 0.4s;
+}
+
+@keyframes equalizer-animation {
+  from {
+    height: 20%;
+  }
+  to {
+    height: 100%;
+  }
+}

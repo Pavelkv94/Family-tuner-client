@@ -1,0 +1,30 @@
+.station {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  background-color: rgb(255, 255, 255, 0.1);
+
+  .note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    width: 60px;
+  }
+  .station-content {
+    margin: 0 5px;
+  }
+  .star {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    width: 60px;
+    margin-left: auto;
+  }
+}
