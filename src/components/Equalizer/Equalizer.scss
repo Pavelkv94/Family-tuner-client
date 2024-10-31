@@ -1,17 +1,16 @@
 .equalizer {
   display: flex;
   align-items: flex-end;
-  width: 30px; /* Width of the equalizer */
-  height: 30px; /* Height of the equalizer */
+  width: 30px;
+  height: 30px;
   position: relative;
 }
 
 .bar {
-  width: 4px; /* Width of each bar */
-  height: 100%; /* Full height */
+  width: 4px;
+  height: 100%;
   margin: 0 1px;
   background: linear-gradient(180deg, rgba(213, 0, 60, 1) 10%, rgba(0, 0, 0, 1) 100%);
-
   animation: equalizer-animation 0.5s infinite alternate;
 }
 

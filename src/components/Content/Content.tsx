@@ -57,8 +57,24 @@ function Content() {
     }
   }, [currentStation]);
 
+  const goNextStation = () => {
+    const currentIndex = stations.findIndex((el) => el.id === currentStation?.id);
+    setCurrentStation(stations[currentIndex + 1]);
+  };
+
+  const goPrevStation = () => {
+    const currentIndex = stations.findIndex((el) => el.id === currentStation?.id);
+    setCurrentStation(stations[currentIndex - 1]);
+  };
+
   return (
     <div className="Content">
+      <div className="light x1"></div>
+      <div className="light x3"></div>
+      <div className="light x4"></div>
+      <div className="light x6"></div>
+      <div className="light x7"></div>
+      <div className="light x9"></div>
       <Playlist
         currentStation={currentStation}
         handleSongClick={handleSongClick}
@@ -69,7 +85,16 @@ function Content() {
         loading={loading}
         showPlayer={showPlayer}
       />
-      <Player isPlayingRadio={isPlayingRadio} currentStation={currentStation} togglePlayRadio={togglePlayRadio} showPlayer={showPlayer} loading={loading} />
+      <Player
+        isPlayingRadio={isPlayingRadio}
+        currentStation={currentStation}
+        togglePlayRadio={togglePlayRadio}
+        showPlayer={showPlayer}
+        loading={loading}
+        goNextStation={goNextStation}
+        goPrevStation={goPrevStation}
+        stations={stations}
+      />
       {/* @ts-ignore */}
       {currentStation && <audio ref={audioRef} src={currentStation.url} controls style={{ display: "none" }} />}
     </div>
